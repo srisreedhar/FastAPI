@@ -11,7 +11,8 @@ def index():
         '/heros':'list of all superheros',
         '/team':'all teams',
         '/powers' : 'lists all unique powers',
-        '/heros/<heroname>':'get hero-details by <heroname>'
+        '/heros/<heroname>':'get hero-details by <heroname>',
+        "/powers/<power_name>":"get all hero-details by <power_name>"
         }
 
 # get all data
