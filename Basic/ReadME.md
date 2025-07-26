@@ -12,7 +12,7 @@ uvicorn api:bsc --reload
 ```
 
 ## Index View
-Check out the superhero headquarters, where all endpoints assemble in glorious formation:
+All endpoints are listed here:
 ```
 http://localhost:8000/
 ```
@@ -20,9 +20,9 @@ http://localhost:8000/
 ## Created Views (Endpoints)
 | Endpoint | Description |
 |----------|-------------|
-| `/all` | Unleashes the entire data vault—every hero, team, and power in one epic swoop! |
-| `/heros` | Lists all superheroes, from caped crusaders to masked marvels. |
-| `/team` | Reveals the squads that save the day, because teamwork makes the dream work! |
-| `/powers` | Showcases every unique superpower, from laser eyes to talking to fish. |
-| `/heros/<heroname>` | Zooms in on a hero’s secret identity by `<heroname>`. No cape required! |
-| `/powers/<power_name>` | Rounds up all heroes wielding the mighty `<power_name>`. Great power, great responsibility! |
+| `/all` |  the entire data view — every hero, team, and power in one epic swoop! |
+| `/heros` | Lists all superheroes. |
+| `/team` | Lists all the Teams |
+| `/powers` | Lists all the powers. |
+| `/heros/<heroname>` | Get hero’s identity by `<heroname>`. |
+| `/powers/<power_name>` | Get Hero details by Power `<power_name>`. Great power, great responsibility! |
