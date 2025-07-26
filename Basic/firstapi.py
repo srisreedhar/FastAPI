@@ -10,8 +10,9 @@ def index():
         '/all': 'all data',
         '/heros':'list of all superheros',
         '/team':'all teams',
+        '/powers' : 'lists all unique powers',
         '/heros/<heroname>':'get hero-details by <heroname>'
-    }
+        }
 
 
 @bsc.get("/all")
@@ -40,6 +41,16 @@ def getallheros():
         'heroes':heros_list
     }
 
+#get all details by Power name
+@bsc.get("/powers")
+def getallpowers():
+    powers_list=list()
+    for power_details in superheroes.values():
+        lst = power_details.get('powers',[])
+        powers_list.extend(lst)
+    return {'all powers':set(powers_list)}
+
+
 # get details by Hero Name
 @bsc.get("/heros/{heroname}")
 def getherobyname(heroname: str):
@@ -59,3 +70,5 @@ def getteambyname(teamname:str):
         if teamname.lower() == hero_detials['team'].lower():
             superhero_list[name]=hero_detials
     return superhero_list
+
+
