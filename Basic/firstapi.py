@@ -10,7 +10,7 @@ def index():
         '/all': 'all data',
         '/heros':'list of all superheros',
         '/team':'all teams',
-        '/heros/heroname':'get hero-details by name'
+        '/heros/<heroname>':'get hero-details by <heroname>'
     }
 
 
@@ -18,6 +18,7 @@ def index():
 def getalldata():
     return superheroes
 
+# get all teams
 @bsc.get("/teams")
 def getallteams():
     uniq = []
@@ -28,6 +29,7 @@ def getallteams():
         'teams':set(uniq)
     }
 
+#get all heroes
 @bsc.get("/heros")
 def getallheros():
     heros_list=list()
@@ -38,6 +40,7 @@ def getallheros():
         'heroes':heros_list
     }
 
+# get details by Hero Name
 @bsc.get("/heros/{heroname}")
 def getherobyname(heroname: str):
     heroname=superheroes.get(heroname,"null")
@@ -48,8 +51,11 @@ def getherobyname(heroname: str):
     heroes_list = list(superheroes.keys())
     return response
 
-
-# '''{'info':'heroname is Case-Sensitive',
-#             'details':%s,
-#             'heores-list':%s
-#             }'''%(heroname,heroes_list)
+# get details by team name
+@bsc.get("/teams/{teamname}")
+def getteambyname(teamname:str):
+    superhero_list=dict()
+    for name,hero_detials in superheroes.items():
+        if teamname.lower() == hero_detials['team'].lower():
+            superhero_list[name]=hero_detials
+    return superhero_list
