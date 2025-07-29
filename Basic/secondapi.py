@@ -3,6 +3,7 @@ from data.superheros import superheroes
 from fastapi.params import Body
 import json
 from pydantic import BaseModel
+from typing import Optional
 
 
 snd = FastAPI()
