@@ -3,6 +3,7 @@ from data.superheros import superheroes
 from fastapi.params import Body
 import json
 
+
 bsc = FastAPI()
 
 
@@ -15,6 +16,7 @@ def index():
         "/powers": "lists all unique powers",
         "/heros/<heroname>": "get hero-details by <heroname>",
         "/powers/<power_name>": "get all hero-details by <power_name>",
+        "createnewhero":"post request to create a new hero details, the data would directly appear in superheros"
     }
 
 
@@ -96,3 +98,15 @@ def create_hero(payload: dict = Body(...)):
     name = payload['real_name']
     superheroes[name]=payload
     print(superheroes[name])
+
+
+
+# Sample Payload
+# payload = {
+#     "real_name": "Sri Sreedhar",
+#     "powers": [
+#         "Flight","Super Strength","X-Ray Vision","Telepathy",
+#         "Heat Vision","Chi Energy","Magic","Kinetic Energy","Combat Skills",	"Wall-Crawling","Size Manipulation"],
+#     "team": "Justice League",
+#     "home": "Hyderabad"
+# }
