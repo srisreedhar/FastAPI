@@ -30,6 +30,6 @@ http://localhost:8000/
 
 ## File Details
 
-[Firstapi](https://github.com/srisreedhar/FastAPI/blob/main/Basic/firstapi.py) has basic api interface with get/post paths/methods
-[Secondapi](https://github.com/srisreedhar/FastAPI/blob/main/Basic/secondapi.py) has schema and pydantic implementations
-[Superheroes Data.py](https://github.com/srisreedhar/FastAPI/blob/main/Basic/data/superheros.py) JSON file which has Superheroes data
+[Firstapi](https://github.com/srisreedhar/FastAPI/blob/main/Basic/firstapi.py) has basic api interface with get/post paths/methods    
+[Secondapi](https://github.com/srisreedhar/FastAPI/blob/main/Basic/secondapi.py) has schema and pydantic implementations    
+[Superheroes Data.py](https://github.com/srisreedhar/FastAPI/blob/main/Basic/data/superheros.py) JSON file which has Superheroes data    
