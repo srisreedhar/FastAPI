@@ -5,10 +5,13 @@ import json
 from pydantic import BaseModel
 from typing import Optional
 
-
+# initiating FastAPI app
 snd = FastAPI()
 
 
+
+
+# get all the urls
 @snd.get("/")
 def index():
     return {
@@ -18,6 +21,7 @@ def index():
         "/powers": "lists all unique powers",
         "/heros/<heroname>": "get hero-details by <heroname>",
         "/powers/<power_name>": "get all hero-details by <power_name>",
+        "createnewhero":"post request to create a new hero details, the data would directly appear in superheros"
     }
 
 
