@@ -3,10 +3,27 @@ from data.superheros import superheroes
 from fastapi.params import Body
 import json
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 # initiating FastAPI app
 snd = FastAPI()
+
+
+class Superhero(BaseModel):
+    real_name: str
+    powers: List[str]
+    team: str
+    home: str
+
+# Sample Payload
+# payload = {
+#     "real_name": "Sri Sreedhar",
+#     "powers": [
+#         "Flight","Super Strength","X-Ray Vision","Telepathy",
+#         "Heat Vision","Chi Energy","Magic","Kinetic Energy","Combat Skills",	"Wall-Crawling","Size Manipulation"],
+#     "team": "Justice League",
+#     "home": "Hyderabad"
+# }
 
 
 
@@ -103,3 +120,6 @@ def create_hero(payload: dict = Body(...)):
     name = payload['real_name']
     superheroes[name]=payload
     print(superheroes[name])
+
+
+
