@@ -24,8 +24,9 @@ http://localhost:8000/
 | `/heros` | Lists all superheroes. |
 | `/team` | Lists all the Teams |
 | `/powers` | Lists all the powers. |
-| `/heros/<heroname>` | Get hero’s identity by `<heroname>`. |
-| `/powers/<power_name>` | Get Hero details by Power `<power_name>`. Great power, great responsibility! |
+| `/heros/<heroname>` | Get hero’s identity by `<heroname>`. For list of Heroes go to `/heros` |
+| `/powers/<power_name>` | Get Hero details by Power `<power_name>`. for list of powers, go to `/powers` |
+| `/createnewhero`|post request to create a new hero details, the data would directly appear in superheros |
 
 
 ## File Details
