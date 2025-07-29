@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Path
 from data.superheros import superheroes
+from fastapi.params import Body
 import json
 
 bsc = FastAPI()
@@ -81,3 +82,17 @@ def getdatabypowername(power_name: str):
         if any(power.lower() == power_name.lower() for power in power_info["powers"]):
             superhero_powers[name] = power_info
     return superhero_powers
+
+
+# create a super hero test record
+@bsc.post("/createnew-test")
+def create_hero_test(payload: dict = Body(...)):
+    print(payload)
+    return {"new hero details":payload}
+
+# create a super hero record
+@bsc.post("/createnewhero")
+def create_hero(payload: dict = Body(...)):
+    name = payload['real_name']
+    superheroes[name]=payload
+    print(superheroes[name])
