@@ -4,18 +4,20 @@ from fastapi.params import Body
 import json
 from pydantic import BaseModel
 from typing import Optional, List
-from datetime import datetime,UTC
+from datetime import datetime, UTC
 from os import environ
 
 # initiating FastAPI app
 snd = FastAPI()
 
 
-class Superhero(BaseModel):
+#Pydantic Model
+class SuperHero(BaseModel):
     real_name: str
     powers: List[str]
     team: str
     home: str
+
 
 # Sample Payload
 # payload = {
@@ -38,7 +40,18 @@ def index():
         "/powers": "lists all unique powers",
         "/heros/<heroname>": "get hero-details by <heroname>",
         "/powers/<power_name>": "get all hero-details by <power_name>",
-        "/createnewhero":"post request to create a new hero details, the data would directly appear in superheros"
+        "/createnewhero": "post request to create a new hero details, the data would directly appear in superheros",
+    }
+
+# diagnostics
+@snd.get("/ping")
+def getuserinfo():
+    return {
+        "api_version": "1.0",
+        "time": datetime.now(tz=UTC),
+        "os": environ["OS"],
+        "user": environ["USERNAME"],
+        "intel-arch": environ["PROCESSOR_ARCHITECTURE"],
     }
 
 
@@ -46,7 +59,7 @@ def index():
 @snd.get("/all")
 def getalldata():
     """
-    Args : 
+    Args :
          No args needed
     Returns :
             JSON Response with all the data
@@ -58,7 +71,7 @@ def getalldata():
 @snd.get("/teams")
 def getallteams():
     """
-    Args : 
+    Args :
         No args needed
     Returns :
             JSON Response with all the teams data
@@ -73,7 +86,7 @@ def getallteams():
 @snd.get("/heros")
 def getallheros():
     """
-    Args : 
+    Args :
          No args needed
     Returns :
             JSON Response with all the heroes data
@@ -88,7 +101,7 @@ def getallheros():
 @snd.get("/powers")
 def getallpowers():
     """
-    Args : 
+    Args :
          No args needed
     Returns :
             JSON Response with all the powers data
@@ -104,7 +117,7 @@ def getallpowers():
 @snd.get("/heros/{heroname}")
 def getherobyname(heroname: str):
     """
-    Args : 
+    Args :
          heroname : string
     Returns :
             JSON Response with the data relevant to argument
@@ -122,7 +135,7 @@ def getherobyname(heroname: str):
 @snd.get("/teams/{teamname}")
 def getteambyname(teamname: str):
     """
-    Args : 
+    Args :
         teamname : string
     Returns :
             JSON Response with the all the superhero data which has <teamname>
@@ -138,7 +151,7 @@ def getteambyname(teamname: str):
 @snd.get("/powers/{power_name}")
 def getdatabypowername(power_name: str):
     """
-    Args : 
+    Args :
         power_name : string
     Returns :
             JSON Response with the all the superhero data which has <power_name>
@@ -157,23 +170,25 @@ def create_hero_test(payload: dict = Body(...)):
     Test POST request endpoint
     """
     print(payload)
-    return {"new hero details":payload}
+    return {"new hero details": payload}
+
 
 # create a super hero record
 @snd.post("/createnewhero")
 def create_hero(payload: dict = Body(...)):
-    name = payload['real_name']
-    superheroes[name]=payload
+    name = payload["real_name"]
+    superheroes[name] = payload
     print(superheroes[name])
 
 
-# diagnostics
-@snd.get("/info")
-def getuserinfo():
+# using Data model
+@snd.post("/createhero")
+def create_new_hero(hero:SuperHero):
+    print(hero)
     return {
-        "api_version":"1.0",
-        "time":datetime.now(tz=UTC),
-        "os": environ["OS"],
-        "user":environ[ "USERNAME"],
-        "intel-arch":environ["PROCESSOR_ARCHITECTURE"]
+        "data":hero
     }
+'''
+INFO:     127.0.0.1:63664 - "POST /createhero HTTP/1.1" 200 OK
+real_name='Sri Sreedhar' powers=['Flight', 'Super Strength', 'X-Ray Vision', 'Heat Vision'] team='Justice League' home='Hyderabad'
+'''
