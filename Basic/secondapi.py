@@ -4,6 +4,8 @@ from fastapi.params import Body
 import json
 from pydantic import BaseModel
 from typing import Optional, List
+from datetime import datetime,UTC
+from os import environ
 
 # initiating FastAPI app
 snd = FastAPI()
@@ -165,4 +167,13 @@ def create_hero(payload: dict = Body(...)):
     print(superheroes[name])
 
 
-
+# diagnostics
+@snd.get("/info")
+def getuserinfo():
+    return {
+        "api_version":"1.0",
+        "time":datetime.now(tz=UTC),
+        "os": environ["OS"],
+        "user":environ[ "USERNAME"],
+        "intel-arch":environ["PROCESSOR_ARCHITECTURE"]
+    }
