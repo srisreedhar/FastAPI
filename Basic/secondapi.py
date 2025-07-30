@@ -17,6 +17,8 @@ class SuperHero(BaseModel):
     powers: List[str]
     team: str
     home: str
+    date_added: datetime = datetime.now()
+    dob:Optional[datetime] = None
 
 
 # Sample Payload
@@ -184,7 +186,10 @@ def create_hero(payload: dict = Body(...)):
 # using Data model
 @snd.post("/createhero")
 def create_new_hero(hero:SuperHero):
-    print(hero)
+    # print(hero.date_added)
+    # print(hero)
+    print(hero.dict())
+    print(hero.model_dump())
     return {
         "data":hero
     }
