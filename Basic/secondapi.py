@@ -43,12 +43,24 @@ def index():
 # get all data
 @snd.get("/all")
 def getalldata():
+    """
+    Args : 
+         No args needed
+    Returns :
+            JSON Response with all the data
+    """
     return superheroes
 
 
 # get all teams
 @snd.get("/teams")
 def getallteams():
+    """
+    Args : 
+        No args needed
+    Returns :
+            JSON Response with all the teams data
+    """
     uniq = []
     for value in superheroes.values():
         uniq.append(value.get("team"))
@@ -58,6 +70,12 @@ def getallteams():
 # get all heroes
 @snd.get("/heros")
 def getallheros():
+    """
+    Args : 
+         No args needed
+    Returns :
+            JSON Response with all the heroes data
+    """
     heros_list = list()
     for everyhero in superheroes:
         heros_list.append(everyhero)
@@ -67,6 +85,12 @@ def getallheros():
 # get all details by Power name
 @snd.get("/powers")
 def getallpowers():
+    """
+    Args : 
+         No args needed
+    Returns :
+            JSON Response with all the powers data
+    """
     powers_list = list()
     for power_details in superheroes.values():
         lst = power_details.get("powers", [])
@@ -77,6 +101,12 @@ def getallpowers():
 # get details by Hero Name
 @snd.get("/heros/{heroname}")
 def getherobyname(heroname: str):
+    """
+    Args : 
+         heroname : string
+    Returns :
+            JSON Response with the data relevant to argument
+    """
     heroname = superheroes.get(heroname, "null")
     if heroname == "null":
         response = "Check the Spelling & Case of the name you are searching"
@@ -89,6 +119,12 @@ def getherobyname(heroname: str):
 # get details by team name
 @snd.get("/teams/{teamname}")
 def getteambyname(teamname: str):
+    """
+    Args : 
+        teamname : string
+    Returns :
+            JSON Response with the all the superhero data which has <teamname>
+    """
     superhero_list = dict()
     for name, hero_detials in superheroes.items():
         if teamname.lower() == hero_detials["team"].lower():
@@ -99,6 +135,12 @@ def getteambyname(teamname: str):
 # get details by power-name
 @snd.get("/powers/{power_name}")
 def getdatabypowername(power_name: str):
+    """
+    Args : 
+        power_name : string
+    Returns :
+            JSON Response with the all the superhero data which has <power_name>
+    """
     superhero_powers = {}
     for name, power_info in superheroes.items():
         if any(power.lower() == power_name.lower() for power in power_info["powers"]):
@@ -109,6 +151,9 @@ def getdatabypowername(power_name: str):
 # create a super hero test record
 @snd.post("/createnew-test")
 def create_hero_test(payload: dict = Body(...)):
+    """
+    Test POST request endpoint
+    """
     print(payload)
     return {"new hero details":payload}
 
