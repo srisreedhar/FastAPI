@@ -9,3 +9,6 @@ Opens the Server on `8080`
 ```bash
 uvicorn main:app --reload --port 8080
 ```
+
+
+# Store API
