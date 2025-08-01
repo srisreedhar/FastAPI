@@ -1,4 +1,4 @@
-from fastapi import FastAPI,APIRouter
+from fastapi import APIRouter
 from pydantic import BaseModel
 from os import environ
 from datetime import datetime, UTC
@@ -6,7 +6,7 @@ from typing import Annotated, Optional
 
 
 
-app = FastAPI()
+router = APIRouter()
 
 # Data Models
 
@@ -29,7 +29,7 @@ post_table = {}
 
 
 # App Ping - Home Page
-@app.get("/info")
+@router.get("/info")
 def info():
     return {
         "api_version": "1.0",
@@ -41,17 +41,17 @@ def info():
 
 
 # Get all the Endpoints
-@app.get("/list-endpoints")
+@router.get("/list-endpoints")
 def list_endpoints():
     endpoints = []
-    for each_route in app.routes:
+    for each_route in router.routes:
         endpoint = [{"path": each_route.path, "methods": list(each_route.methods)}]
         endpoints.append(endpoint)
     return {"endpoints": endpoints}
 
 
 
-@app.post("/postnew",response_model=UserPost) # response_model - shapes the response
+@router.post("/postnew",response_model=UserPost) # response_model - shapes the response
 def create_post(post: UserPostIn):
     data = post.model_dump()
     last_record_id = len(post_table) # get length and assign as id
@@ -63,6 +63,6 @@ def create_post(post: UserPostIn):
 
 
 # returns all the posts/records/entries
-@app.get("/getall", response_model=list[UserPost])
+@router.get("/getall", response_model=list[UserPost])
 def getall():
     return post_table.values()
