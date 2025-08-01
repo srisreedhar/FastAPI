@@ -51,12 +51,18 @@ def list_endpoints():
 
 
 
-@app.post("/",response_model=UserPost)
+@app.post("/postnew",response_model=UserPost) # post would be responded with a UserPost
 def create_post(post: UserPostIn):
     data = post.model_dump()
     last_record_id = len(post_table) # get length and assign as id
     new_post_data = {**data,"id":last_record_id}
     # push the post to post table
     post_table[last_record_id] = new_post_data
+    print(post_table)
     return new_post_data
 
+
+# returns all the posts/records/entries
+@app.get("/getall", response_model=list[UserPost])
+def getall():
+    return post_table.values()
