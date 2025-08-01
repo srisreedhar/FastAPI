@@ -8,6 +8,7 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+# Data Models
 
 class UserPostIn(BaseModel):
     body: str
@@ -16,9 +17,15 @@ class UserPostIn(BaseModel):
 class UserPost(UserPostIn):
     id: int
 
+
+# class UserPost(BaseModel):
+#     body: str
+#     id: Optional[int] = int
+
+
+
 # store data
 post_table = {}
-
 
 
 # App Ping - Home Page
